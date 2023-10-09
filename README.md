@@ -95,3 +95,11 @@ de date în fișierul migrației generat. După ce migrația a fost definita, o 
 iar Laravel va aplica
 modificările în baza de date.
 ```
+### 5. Surse și resurse utilizate
+- [Laravel routing](https://laravel.com/docs/10.x/routing)
+- [Laravel migrations](https://laravel.com/docs/10.x/migrations)
+- [Livewire events](https://laravel-livewire.com/docs/2.x/events)
+- [Livewire docs](https://laravel-livewire.com/docs/2.x/quickstart)
+- [Tailwind](https://tailwindcss.com/docs/installation)
+- [Bootstrap modals](https://getbootstrap.com/docs/4.1/getting-started/introduction/)
+- [Laravel after_or_equal Date Validation](https://www.mywebtuts.com/blog/laravel-after-or-equal-date-validation-example-tutorial/)
