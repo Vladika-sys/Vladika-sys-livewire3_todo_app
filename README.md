@@ -1,6 +1,8 @@
 # Laravel todo app cu laravel și livewire
 
 În acest laborator am implementat o aplicație de tip todo cu ajutorul framework-ului laravel și a plugginului livewire
+Am separat logica de afaceri de logica de prezentare și de control, am implementat autentificarea utilizatorilor și restricționarea accesului la anumite rute sau acțiuni, am implementat testarea.
+
 
 ## Setup
 
@@ -8,11 +10,9 @@
 2. Creați un file nou `.env` și copiați în el conținutul fișierului `.env.example`
 3. Rulați comanda `composer install`
 4. Rulați comanda `php artisan key:generate` și introduceți cheia din browser în fișierul `.env`, în variabila `APP_KEY`
-
-## Asigurați-vă că aveți pornit serverul local, apoi rulați comanda
-```
-php artisan serv
-```
+5. Rulați comanda `npm install`
+6. Rulați comanda `php artisan serv`
+7. Rulați comanda `npm run dev`
 
 ## Utilizare
 
@@ -20,9 +20,23 @@ php artisan serv
 1. Întâi de toate, creați baza de date `todo_app`
 2. Pentru a crea tabelele, rulați comanda `php artisan migrate`
 3. Pentru a popula tabelul Categories, rulați comanda `php artisan db:seed CategorySeeder`
-4. Astaa este tot, deja conținutul tabeluluii `tasks` poate fi manipulat din interfața grafică
-
-## Întrebări de control
+4. Pentru a accesa pagina todo, trebuie să aveți un cont de utilizator. Pentru a crea un cont de utilizator, accesați pagina `'your_local_host'/register`, de exemplu la mine este `http://http://127.0.0.1:8000/register`
+5. După ce ați creat contul, accesați pagina `http://http://127.0.0.1:8000/login`
+6. !!!Atentie!!! Pentru a utiliza functionalitatea `Forgot your password?`, este nevoie sa setati in fisierul `.env` urmatoarele variabile:
+```
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.gmail.com
+MAIL_PORT=587
+MAIL_USERNAME=your_email
+MAIL_PASSWORD=your_password
+MAIL_ENCRYPTION=tls
+MAIL_FROM_ADDRESS="laravelTodoApp@usm.md"
+MAIL_FROM_NAME="${APP_NAME}"
+```
+4. Continutul  tabelului `tasks` poate fi manipulat din interfața grafică
+5. Pentru a rula toate testele existente, rulați comanda `php artisan test`
+6. Pentru a rula anumite teste, rulați comanda `php artisan test --filter name_of_test`, de exemplu `php artisan test --filter=UserTest`
+## Întrebări de control pentru lab1
 
 ### 1. Care sunt ***avantajele*** utilizării framework-ului **laravel**?
 ```text
@@ -95,6 +109,38 @@ de date în fișierul migrației generat. După ce migrația a fost definita, o 
 iar Laravel va aplica
 modificările în baza de date.
 ```
+## Întrebări de control pentru lab2
+
+### 1.Ce reprezintă Service Layer în arhitectura Model-View-Controller (MVC) a aplicațiilor web și ce rol au ele în separarea logicii?
+
+În arhitectura MVC, Service Layer este un strat de logică de afaceri care se află între Model și Controller. Acesta este responsabil pentru implementarea logicii de afaceri a aplicației, cum ar fi validarea datelor, aplicarea regulilor de afaceri și gestionarea tranzacțiilor.
+Rolul Service Layer în separarea logicii este de a decupla logica de afaceri de logica de prezentare și de control. Acest lucru face ca aplicația să fie mai ușor de întreținut și de testat.
+
+### 2. Explicați conceptele de autentificare și autorizare în dezvoltarea web.
+
+Autentificarea este procesul de verificare a identității unui utilizator. Autorizarea este procesul de determinare a permisiunilor unui utilizator.
+Autentificare
+În dezvoltarea web, autentificarea se realizează, în general, prin intermediul unui nume de utilizator și a unei parole. Utilizatorul introduce aceste informații într-un formular de autentificare, iar aplicația le verifică în baza de date. Dacă informațiile sunt corecte, utilizatorul este autentificat și i se permite să acceseze resursele aplicației.
+Autorizare
+Autorizarea este procesul de determinare a permisiunilor unui utilizator de a accesa anumite resurse. În dezvoltarea web, autorizarea se realizează, în general, prin intermediul rolurilor. Fiecare utilizator este asociat cu unul sau mai multe roluri. Fiecare rol are un set de permisiuni asociate.
+
+### 3.Cum se poate implementa autentificarea utilizatorilor și restricționarea accesului la anumite rute sau acțiuni în framework-ul selectat de dvs.?
+
+În Laravel, autentificarea utilizatorilor se implementează folosind pachetul Auth. Acest pachet oferă o serie de funcții și clase pentru a implementa autentificarea cu nume de utilizator și parolă, autentificarea cu tokenuri și alte metode.
+Pentru a restricționa accesul la anumite rute sau acțiuni, se poate folosi middleware-ul auth. Acest middleware verifică dacă utilizatorul este autentificat și, dacă nu este, îl redirecționează la pagina de autentificare.
+
+### 4. Care este diferența dintre testarea unitară (Unit Tests) și testarea de integrare (Integration Tests)
+
+Testarea unitară este procesul de testare a unui modul sau a unei clase de cod în mod izolat. Testarea de integrare este procesul de testare a modului în care modulele sau clasele de cod interacționează între ele.
+În Laravel, testarea unitară se realizează folosind pachetul PHPUnit. Acest pachet oferă o serie de funcții și clase pentru a scrie teste unitare.
+Testarea de integrare se realizează folosind pachetul Laravel Dusk. Acest pachet oferă o serie de funcții și clase pentru a scrie teste de integrare care implică interacțiunea cu interfața web a aplicației.
+
+### 5. Concluzie
+
+Service Layer este un strat important în arhitectura MVC. Acesta ajută la separarea logicii de afaceri de logica de prezentare și de control, ceea ce face ca aplicația să fie mai ușor de întreținut și de testat.
+Autentificarea și autorizarea sunt concepte importante în dezvoltarea web. Acestea ajută la protejarea aplicației împotriva accesului neautorizat.
+Testarea unitară și testarea de integrare sunt două tipuri de teste importante pentru a asigura calitatea aplicației.
+
 ### 5. Surse și resurse utilizate
 - [Laravel routing](https://laravel.com/docs/10.x/routing)
 - [Laravel migrations](https://laravel.com/docs/10.x/migrations)
@@ -103,3 +149,6 @@ modificările în baza de date.
 - [Tailwind](https://tailwindcss.com/docs/installation)
 - [Bootstrap modals](https://getbootstrap.com/docs/4.1/getting-started/introduction/)
 - [Laravel after_or_equal Date Validation](https://www.mywebtuts.com/blog/laravel-after-or-equal-date-validation-example-tutorial/)
+- [Laravel service container](https://laravel.com/docs/10.x/container#binding-basics)
+- [Laravel breeze](https://laravel.com/docs/10.x/starter-kits)
+- [Testing in Laravel | How to Write Tests With Laravel |](https://www.youtube.com/watch?v=UjA-16diixc&t=974s&ab_channel=CodeWithDary)
