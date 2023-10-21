@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Services\TodoService;
 use Illuminate\Support\Facades\Crypt;
 use JetBrains\PhpStorm\NoReturn;
 use Livewire\Component;
@@ -36,7 +37,7 @@ class ToDo extends Component
     ];
     public function createToDo(){
         $this->validate();
-        Task::addNewTask($this->title, $this->description, $this->category_id, $this->dueDate);
+        (new TodoService)->addNewTask($this->title, $this->description, $this->category_id, $this->dueDate);
         session()->flash('success', 'Task created successfully');
         $this->reset();
         $this->resetPage();
@@ -44,25 +45,18 @@ class ToDo extends Component
     public function render()
     {
         return view('livewire.to-do',[
-            'tasks' => Task::latest()->where('title','like',"%{$this->searchInput}%")->paginate(5)
+            'tasks' => (new \App\Services\TodoService)->searchAndDisplayTask($this->searchInput),
         ]);
     }
 
     public function deleteTask($id){
-        try{
-            $task = Task::findOrFail($id);
-            $task->delete();
-            session()->flash('deleted', 'Task deleted successfully');
-        }catch(\Exception $e){
-            session()->flash('deleteError', 'Task not found');
-        }
+        (new TodoService)->deleteTask($id);
+        $this->resetPage();
     }
 
     public function completeTask($task){
-        $task = Task::find($task);
-        $task->completed = !$task->completed;
-        $task->save();
-        session()->flash('completed', 'Task completed successfully');
+        (new TodoService)->completeTask($task);
+        $this->resetPage();
     }
     #[On('showTaskEditModal')]
     public function editTask($task){
@@ -77,12 +71,7 @@ class ToDo extends Component
     #[On('hideTaskEditModal')]
     public function updateTask(){
         $this->validate();
-        $task = Task::find(Crypt::decryptString($this->selectedTaskId));
-        $task->title = $this->title;
-        $task->description = $this->description;
-        $task->category_id = $this->category_id;
-        $task->dueDate = $this->dueDate;
-        $task->save();
+        (new TodoService)->updateTask(Crypt::decryptString($this->selectedTaskId), $this->title, $this->description, $this->category_id, $this->dueDate);
         $this->reset();
         $this->dispatch("hideTaskEditModal");
         session()->flash('updated', 'Task updated successfully');

@@ -1,6 +1,4 @@
 <div>
-
-
     @include('livewire.includes.create-todo')
     @include('livewire.includes.search-task')
     <div id="todos-list">
