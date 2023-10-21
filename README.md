@@ -112,35 +112,35 @@ modificările în baza de date.
 ## Întrebări de control pentru lab2
 
 ### 1.Ce reprezintă Service Layer în arhitectura Model-View-Controller (MVC) a aplicațiilor web și ce rol au ele în separarea logicii?
-
+```
 În arhitectura MVC, Service Layer este un strat de logică de afaceri care se află între Model și Controller. Acesta este responsabil pentru implementarea logicii de afaceri a aplicației, cum ar fi validarea datelor, aplicarea regulilor de afaceri și gestionarea tranzacțiilor.
 Rolul Service Layer în separarea logicii este de a decupla logica de afaceri de logica de prezentare și de control. Acest lucru face ca aplicația să fie mai ușor de întreținut și de testat.
-
+```
 ### 2. Explicați conceptele de autentificare și autorizare în dezvoltarea web.
-
+```
 Autentificarea este procesul de verificare a identității unui utilizator. Autorizarea este procesul de determinare a permisiunilor unui utilizator.
 Autentificare
 În dezvoltarea web, autentificarea se realizează, în general, prin intermediul unui nume de utilizator și a unei parole. Utilizatorul introduce aceste informații într-un formular de autentificare, iar aplicația le verifică în baza de date. Dacă informațiile sunt corecte, utilizatorul este autentificat și i se permite să acceseze resursele aplicației.
 Autorizare
 Autorizarea este procesul de determinare a permisiunilor unui utilizator de a accesa anumite resurse. În dezvoltarea web, autorizarea se realizează, în general, prin intermediul rolurilor. Fiecare utilizator este asociat cu unul sau mai multe roluri. Fiecare rol are un set de permisiuni asociate.
-
+```
 ### 3.Cum se poate implementa autentificarea utilizatorilor și restricționarea accesului la anumite rute sau acțiuni în framework-ul selectat de dvs.?
-
+```
 În Laravel, autentificarea utilizatorilor se implementează folosind pachetul Auth. Acest pachet oferă o serie de funcții și clase pentru a implementa autentificarea cu nume de utilizator și parolă, autentificarea cu tokenuri și alte metode.
 Pentru a restricționa accesul la anumite rute sau acțiuni, se poate folosi middleware-ul auth. Acest middleware verifică dacă utilizatorul este autentificat și, dacă nu este, îl redirecționează la pagina de autentificare.
-
+```
 ### 4. Care este diferența dintre testarea unitară (Unit Tests) și testarea de integrare (Integration Tests)
-
+```
 Testarea unitară este procesul de testare a unui modul sau a unei clase de cod în mod izolat. Testarea de integrare este procesul de testare a modului în care modulele sau clasele de cod interacționează între ele.
 În Laravel, testarea unitară se realizează folosind pachetul PHPUnit. Acest pachet oferă o serie de funcții și clase pentru a scrie teste unitare.
 Testarea de integrare se realizează folosind pachetul Laravel Dusk. Acest pachet oferă o serie de funcții și clase pentru a scrie teste de integrare care implică interacțiunea cu interfața web a aplicației.
-
+```
 ### 5. Concluzie
-
+```
 Service Layer este un strat important în arhitectura MVC. Acesta ajută la separarea logicii de afaceri de logica de prezentare și de control, ceea ce face ca aplicația să fie mai ușor de întreținut și de testat.
 Autentificarea și autorizarea sunt concepte importante în dezvoltarea web. Acestea ajută la protejarea aplicației împotriva accesului neautorizat.
 Testarea unitară și testarea de integrare sunt două tipuri de teste importante pentru a asigura calitatea aplicației.
-
+```
 ### 5. Surse și resurse utilizate
 - [Laravel routing](https://laravel.com/docs/10.x/routing)
 - [Laravel migrations](https://laravel.com/docs/10.x/migrations)
